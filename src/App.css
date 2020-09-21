@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  background: rgb(204, 221, 177);
+  
+}
+
+.App-header{
+  color: black;
+}
