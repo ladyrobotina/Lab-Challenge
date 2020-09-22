@@ -1,31 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductInfo from '../components/ProductInfo'
+import CatalogoInfo from '../components/CatalogoInfo'
 
 
 // vamos a hacer una peticion a la api para que traiga la informacion de acuerdo al id que enviamos a la ruta
-class ProductInfoContainer extends Component {
+class CatalogotInfoContainer extends Component {
     
     state = {
         // vamos a almacenar la data
-        meliData: [],
+        meliData: []
     }    
     
     componentDidMount(){
         // destructurar
-        // const {match} = this.props
-        // const {url} = match.params
-        var url = window.location.href;
-        let variable = url.split('/') // CONVERTIR EN ARRAY
-        let id = variable.pop() // saca el ultimp valor del array
-        let nameProduct = variable.pop() // lo ultimo que queda es el nombre del producto
-       
-        console.log(nameProduct)
-        
+        const {match} = this.props
+        const {title} = match.params
         // llamado a la api
-        
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${nameProduct}`)
-           .then(res =>{
+        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${title}`)
+        .then(res =>{
             const {results} = res.data;
             console.log(results)
 
@@ -41,17 +33,18 @@ class ProductInfoContainer extends Component {
     }
 
     render(){
-                
+        const {match} = this.props
+        const {id} = match.params
         const data = this.state.meliData
-        console.log(data)
-        
-        
-        
+        const info = data.filter(infoProduct => {
+            return infoProduct.id===id
+        })
+        console.log(info)
         return(
             <div>
-            {data.map(producto =>{
+            {info.map(producto =>{
                 return (
-                <ProductInfo name={producto.title} 
+                <CatalogoInfo name={producto.title} 
                 image={producto.thumbnail}
                 price={producto.price}
                 currency_id={producto.currency_id}
@@ -65,4 +58,4 @@ class ProductInfoContainer extends Component {
     }
 }
 
-export default ProductInfoContainer;
+export default CatalogotInfoContainer;

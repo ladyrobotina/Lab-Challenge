@@ -12,7 +12,7 @@ function ProductList({arrayOrdenado, condicion}) {
     }
     return(
         <Fragment>
-            <h1>Catalogo</h1>
+            <h1>Resultado de busqueda</h1>
             <Grid container spacing={24} justify='center' >
                 
                 {

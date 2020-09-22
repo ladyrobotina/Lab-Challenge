@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AppNav from './AppNav';
 import '../App.css';
-import CatalogoListContainer from './CatalogoList';
+import CatalogoListContainer from '../containers/CatalogoListContainer';
 import Slider from './Slider';
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
                 
                 <h1>Labs Challenge</h1>
                 <h2>Henry Store</h2>
-                 {/* <CatalogoListContainer/>  */}
+                 <CatalogoListContainer/>  
             </header>
         </div>
     );

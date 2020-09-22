@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductList from '../components/ProductList';
-import AppNav from '../components/AppNav';
-import './ProductListContainer.css'
+import CatalogoList from '../components/CatalogoList';
 
 import Pagination from '@material-ui/lab/Pagination';
 
 
-class ProductListContainer extends Component {
+class CatalogoListContainer extends Component {
 
     state = {
         // vamos a almacenar la data
@@ -17,7 +15,6 @@ class ProductListContainer extends Component {
         index: 0,
         limit: 30,
         newArray: [],
-        condicion: '',
     }    
     
     componentDidMount(){
@@ -26,12 +23,12 @@ class ProductListContainer extends Component {
 
     // paginacion
     fetchData = (offSet = 0) => {
-        // busqueda 
-        const { match } = this.props
-        const { query } = match.params
+        
+        // const { match } = this.props
+        // const { query } = match.params
         
         // llamado a la api
-        const url = `https://api.mercadolibre.com/sites/MLA/search?q=${query}`;
+        const url = `https://api.mercadolibre.com/sites/MLA/search?q=MLA`;
         // crear parametros
         
         axios.get(url)
@@ -66,15 +63,8 @@ class ProductListContainer extends Component {
         this.fetchData()
     }
 
-    // seleccionar la condicion     
-    onSelectedChange = (e) => {
-        if (e.target.value !== ''){
-            this.setState({
-                condicion:e.target.value
-            })
-            alert (e.target.value)
-        }
-    } 
+         
+        
 
     render(){
 
@@ -83,40 +73,10 @@ class ProductListContainer extends Component {
         //console.log(currentOffset)
         // solo queremos la data del estado
 
-        // ordenar por precio
-        const arrayOrdenado = newArray.sort((a, b) => {
-            return b.price - a.price
-        })
-
-        // ordenar por condicion
-        let arrayCondicion = newArray.map(filtrar => {
-            return filtrar.condition
-            })
-            var newArrayCondicion = Array.from(new Set(arrayCondicion))
-             console.log(newArrayCondicion)
-
         return(
-            <div className='productList'>
-                <AppNav/>
-                <div className='filtro' >
-                {
-                    newArrayCondicion.length===1?
-                    <p>No es posible filtrar por condicion</p>
-                    :
-                    newArrayCondicion.length > 1?
-                    <select onChange={this.onSelectedChange}>
-                        <option value='' >Filtrar por condicion</option>
-                        {
-                            newArrayCondicion.map(filtrado => {
-                            return <option value={filtrado}>{filtrado}</option>
-                            })
-                        }
-                    </select>
-                    :
-                    <span/>
-                }
-                </div>
-                <ProductList arrayOrdenado={arrayOrdenado} condicion={this.state.condicion}  />
+            <div className='catalogoList'>
+                
+                <CatalogoList newArray={newArray} />
                 
                 <Pagination count={index} page={pageCounter} onChange={this.handleChange} />
             </div>
@@ -124,4 +84,4 @@ class ProductListContainer extends Component {
     }
 }
 
-export default ProductListContainer;
+export default CatalogoListContainer;

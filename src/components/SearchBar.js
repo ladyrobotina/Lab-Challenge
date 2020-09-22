@@ -11,6 +11,7 @@ export default function SearchBar({onSearch}) {
     <form onSubmit={(e) => {
      e.preventDefault();
       onSearch(query);
+      //window.location.reload(false);
     }}>
       <input
         type="text"
