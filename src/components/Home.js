@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AppNav from './AppNav';
 import '../App.css';
-import { carouselExampleSlidesOnly } from 'bootstrap';
+import CatalogoListContainer from './CatalogoList';
 import Slider from './Slider';
 
 const Home = () => {
@@ -10,11 +10,12 @@ const Home = () => {
     return(
         <div className='App'>
             <AppNav/>
+            
             <header className='App-header'>
-                {/* <img src={process.env.PUBLIC_URL + '/images/mitiendita.png'} width='200' alt='tiendita' /> */}
+                
                 <h1>Labs Challenge</h1>
-                <Slider/>
-                <Link to='/products'>Pase</Link> 
+                <h2>Henry Store</h2>
+                 {/* <CatalogoListContainer/>  */}
             </header>
         </div>
     );

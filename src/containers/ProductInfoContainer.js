@@ -8,16 +8,24 @@ class ProductInfoContainer extends Component {
     
     state = {
         // vamos a almacenar la data
-        meliData: []
+        meliData: [],
     }    
     
     componentDidMount(){
         // destructurar
-        const {match} = this.props
-        const {title} = match.params
+        // const {match} = this.props
+        // const {url} = match.params
+        var url = window.location.href;
+        let variable = url.split('/')
+        let variablePrueba = variable [variable.length - 2]
+        
+       
+        console.log(variable)
+        console.log(variablePrueba)
         // llamado a la api
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${title}`)
-        .then(res =>{
+        
+        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${variablePrueba}`)
+           .then(res =>{
             const {results} = res.data;
             console.log(results)
 
@@ -25,6 +33,7 @@ class ProductInfoContainer extends Component {
             this.setState({
                 // le estamos diciendo que va a tener esa constante
                 meliData: results
+                
             })
         })
         .catch(error =>{
@@ -33,11 +42,15 @@ class ProductInfoContainer extends Component {
     }
 
     render(){
-        const {match} = this.props
-        const {id} = match.params
+        // const {match} = this.props
+        // const {id} = match.params
+        var url = window.location.href;
+        var obDatos = url.split('/')
         const data = this.state.meliData
+        const permalink = obDatos.splice(4).join('/')
+        console.log(data)
         const info = data.filter(infoProduct => {
-            return infoProduct.id===id
+            return infoProduct.permalink===permalink
         })
         console.log(info)
         return(

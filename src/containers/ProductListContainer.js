@@ -16,6 +16,7 @@ class ProductListContainer extends Component {
         index: 0,
         limit: 30,
         newArray: [],
+        condicion: '',
     }    
     
     componentDidMount(){
@@ -24,7 +25,7 @@ class ProductListContainer extends Component {
 
     // paginacion
     fetchData = (offSet = 0) => {
-        
+        // busqueda 
         const { match } = this.props
         const { query } = match.params
         
@@ -64,8 +65,15 @@ class ProductListContainer extends Component {
         this.fetchData()
     }
 
-         
-        
+    // seleccionar la condicion     
+    onSelectedChange = (e) => {
+        if (e.target.value !== ''){
+            this.setState({
+                condicion:e.target.value
+            })
+            alert (e.target.value)
+        }
+    } 
 
     render(){
 
@@ -74,10 +82,38 @@ class ProductListContainer extends Component {
         //console.log(currentOffset)
         // solo queremos la data del estado
 
+        // ordenar por precio
+        const arrayOrdenado = newArray.sort((a, b) => {
+            return b.price - a.price
+        })
+
+        // ordenar por condicion
+        let arrayCondicion = newArray.map(filtrar => {
+            return filtrar.condition
+            })
+            var newArrayCondicion = Array.from(new Set(arrayCondicion))
+             console.log(newArrayCondicion)
+
         return(
             <div className='productList'>
                 <AppNav/>
-                <ProductList newArray={newArray} />
+                {
+                    newArrayCondicion.length===1?
+                    <h5>No es posible filtrar por condicion</h5>
+                    :
+                    newArrayCondicion.length > 1?
+                    <select onChange={this.onSelectedChange}>
+                        <option value='' >Filtrar por condicion</option>
+                        {
+                            newArrayCondicion.map(filtrado => {
+                            return <option value={filtrado}>{filtrado}</option>
+                            })
+                        }
+                    </select>
+                    :
+                    <span/>
+                }
+                <ProductList arrayOrdenado={arrayOrdenado} condicion={this.state.condicion}  />
                 
                 <Pagination count={index} page={pageCounter} onChange={this.handleChange} />
             </div>

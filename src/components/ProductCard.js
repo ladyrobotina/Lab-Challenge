@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Card, CardMedia, CardContent, Typography, colors } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-function ProductCard({ name, classes, image, price, to }){
+function ProductCard({ name, classes, image, price, condition, to, permalink, url }){
     return(
         // construccion de la card
         <Card className={classes.item}>
@@ -14,7 +14,10 @@ function ProductCard({ name, classes, image, price, to }){
             </CardContent>   
             <CardContent>
             <Typography component='p' variant='p' color='textPrimary' >${price}</Typography>
-            </CardContent>        
+            </CardContent>   
+            <CardContent>
+            <Typography component='p' variant='p' color='textPrimary' >Condicion: {condition}</Typography>
+            </CardContent>      
         </Card>
     );
 }

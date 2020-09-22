@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react'
 
 const useStyles = makeStyles({
     
@@ -19,9 +20,43 @@ const useStyles = makeStyles({
     },
   });
 
-function ProductInfo({ name, image, price, currency_id, available_quantity, condition  }){
+function ProductInfo({ name, image, price, currency_id, available_quantity, condition, url, permalink  }){
 
     const classes = useStyles();
+    
+
+//      var url = window.location.href;
+//      //Esta variable separa la url conn "/", para luego tomar el ultimo valor 
+//      var separarUrl = url.split("/");
+//      //Esta variable toma el ultimo valor de la URL, para hacerla dinamica
+//      var tomarUltValor = separarUrl.pop();
+//      //URL dinamica
+//      var urlreal = `http://localhost:3000/products/${tomarUltValor}`;
+
+//      // recibe como parámetro una función que se ejecutará cada vez que nuestro componente se renderice, ya sea por un cambio de estado
+//    useEffect(() => {
+//      fetch(`http://localhost:3000/products/${tomarUltValor}`)
+//        .then((response) => response.json())
+
+//        .then(producto => {
+
+//          setDetalles({
+//            id: producto[0].id,
+//            name: producto[0].name,
+//            price: producto[0].price,
+//            currency_id: producto[0].currency_id,
+//            available_quantity: producto[0].available_quantity,
+//            image: producto[0].image,
+//            condition: producto[0].condition
+           
+//          })
+//        })
+//        .catch(error => {
+//          return error;
+//        })
+
+
+//    }, []);
 
     return(
         // construccion de la card
