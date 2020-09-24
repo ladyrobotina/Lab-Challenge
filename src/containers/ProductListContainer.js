@@ -98,10 +98,11 @@ class ProductListContainer extends Component {
         return(
             <div className='productList'>
                 <AppNav/>
+                <h1>Resultado de busqueda</h1>
                 <div className='filtro' >
                 {
                     newArrayCondicion.length===1?
-                    <p>No es posible filtrar por condicion</p>
+                    <p>Solo hay una sola condicion</p>
                     :
                     newArrayCondicion.length > 1?
                     <select onChange={this.onSelectedChange}>

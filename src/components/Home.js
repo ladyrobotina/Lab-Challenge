@@ -13,7 +13,7 @@ const Home = () => {
             
             <header className='App-header'>
                 
-                <h1>Labs Challenge</h1>
+                {/* <h1>Labs Challenge</h1> */}
                 <h2>Henry Store</h2>
                  <CatalogoListContainer/>  
             </header>

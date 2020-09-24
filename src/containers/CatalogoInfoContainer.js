@@ -43,9 +43,11 @@ class CatalogotInfoContainer extends Component {
         return(
             <div>
             {info.map(producto =>{
+                console.log(producto)
+                let image = producto.thumbnail.replace('I.jpg','B.jpg')
                 return (
                 <CatalogoInfo name={producto.title} 
-                image={producto.thumbnail}
+                image={image}
                 price={producto.price}
                 currency_id={producto.currency_id}
                 available_quantity={producto.available_quantity}

@@ -13,18 +13,14 @@ class ProductInfoContainer extends Component {
     
     componentDidMount(){
         // destructurar
-        // const {match} = this.props
-        // const {url} = match.params
-        var url = window.location.href;
-        let variable = url.split('/') // CONVERTIR EN ARRAY
-        let id = variable.pop() // saca el ultimp valor del array
-        let nameProduct = variable.pop() // lo ultimo que queda es el nombre del producto
-       
-        console.log(nameProduct)
+         const {match} = this.props
+         const {title, id} = match.params
+         const name = title.split('-').join(' ')
+        
         
         // llamado a la api
         
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${nameProduct}`)
+        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${name}`)
            .then(res =>{
             const {results} = res.data;
             console.log(results)
@@ -32,7 +28,9 @@ class ProductInfoContainer extends Component {
             // para actualizar ese state o esa meliData
             this.setState({
                 // le estamos diciendo que va a tener esa constante
-                meliData: results
+                meliData: results.filter(r => {
+                    return r.id===id
+                })
             })
         })
         .catch(error =>{
@@ -50,9 +48,10 @@ class ProductInfoContainer extends Component {
         return(
             <div>
             {data.map(producto =>{
+                let image = producto.thumbnail.replace('I.jpg','B.jpg')
                 return (
                 <ProductInfo name={producto.title} 
-                image={producto.thumbnail}
+                image={image}
                 price={producto.price}
                 currency_id={producto.currency_id}
                 available_quantity={producto.available_quantity}

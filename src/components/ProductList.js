@@ -12,18 +12,20 @@ function ProductList({arrayOrdenado, condicion}) {
     }
     return(
         <Fragment>
-            <h1>Resultado de busqueda</h1>
+            {/* <h1>Resultado de busqueda</h1> */}
             <Grid container spacing={24} justify='center' >
                 
                 {
                     newCondicion && newCondicion.length ?
 
                         newCondicion.map(producto => {
+                            let image = producto.thumbnail.replace('I.jpg','B.jpg')
+                            let cardTitle = producto.title.split(' ').join('-')   
                         return (
                         <Grid item md={3}>
-                        <ProductCard to={`/productinfo/${producto.permalink}/${producto.id} `} 
+                        <ProductCard to={`/productinfo/${cardTitle}/${producto.id} `} 
                         name={producto.title} 
-                        image={producto.thumbnail} 
+                        image={image} 
                         price={producto.price}
                         condition={producto.condition} />
                         </Grid>);
@@ -32,11 +34,13 @@ function ProductList({arrayOrdenado, condicion}) {
                     :
 
                     arrayOrdenado.map(producto => {
+                        let image = producto.thumbnail.replace('I.jpg','B.jpg')
+                        let cardTitle = producto.title.split(' ').join('-')
                     return (
                     <Grid item md={3}>
-                    <ProductCard to={`/productinfo/${producto.permalink}/${producto.id} `} 
+                    <ProductCard to={`/productinfo/${cardTitle}/${producto.id} `} 
                     name={producto.title} 
-                    image={producto.thumbnail} 
+                    image={image} 
                     price={producto.price}
                     condition={producto.condition} />
                     </Grid>);

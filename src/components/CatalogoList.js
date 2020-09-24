@@ -8,10 +8,12 @@ function CatalogoList({newArray}) {
             
             <Grid container spacing={24} justify='center' >
                 {newArray.map(producto => {
+                    let image = producto.thumbnail.replace('I.jpg','B.jpg')
+                    let cardTitle = producto.title.split(' ').join('%20')
                     return (
-                    <Grid item md={3}>
-                    <CatalogoCard to={`/catalogoinfo/${producto.title}/${producto.id}`} 
-                    name={producto.title} image={producto.thumbnail} price={producto.price} />
+                    <Grid item md={4}>
+                    <CatalogoCard to={`/catalogoinfo/${cardTitle}/${producto.id}`} 
+                    name={producto.title} image={image} price={producto.price} currency_id={producto.currency_id} />
                     </Grid>);
                 })}
             {/* metemos las cards dentro de esos grids */}

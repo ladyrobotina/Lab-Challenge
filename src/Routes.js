@@ -13,7 +13,7 @@ const Routes = () => {
             <Route exact path='/' component={Home} />
            {/* <Route path='/products' component={ProductListContainer} /> */}
             <Route path='/products/:query' component={ProductListContainer} />
-            <Route path='/productinfo/:url/:id' component={ProductInfoContainer} />
+            <Route path='/productinfo/:title/:id' component={ProductInfoContainer} />
             <Route path='/catalogoinfo/:title/:id' component={CatalogoInfoContainer} />
         </Switch>
     );
