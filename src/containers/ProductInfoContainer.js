@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import ProductInfo from '../components/ProductInfo'
-
+import ProductInfo from '../components/ProductInfo';
+import AppNav from '../components/AppNav';
 
 // vamos a hacer una peticion a la api para que traiga la informacion de acuerdo al id que enviamos a la ruta
 class ProductInfoContainer extends Component {
@@ -15,12 +15,12 @@ class ProductInfoContainer extends Component {
         // destructurar
          const {match} = this.props
          const {title, id} = match.params
-         const name = title.split('-').join(' ')
+         
         
         
         // llamado a la api
         
-        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${name}`)
+        axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${title}`)
            .then(res =>{
             const {results} = res.data;
             console.log(results)
@@ -39,14 +39,17 @@ class ProductInfoContainer extends Component {
     }
 
     render(){
+
+        // renderizamos los resultado obtenidos y estan contenidos
                 
         const data = this.state.meliData
         console.log(data)
         
         
-        
+        // renderizamos la card del producto seleccionado en la busqueda
         return(
             <div>
+                <AppNav/>
             {data.map(producto =>{
                 let image = producto.thumbnail.replace('I.jpg','B.jpg')
                 return (

@@ -18,6 +18,7 @@ class ProductListContainer extends Component {
         limit: 30,
         newArray: [],
         condicion: '',
+        varMeli: '',
     }    
     
     componentDidMount(){
@@ -46,6 +47,8 @@ class ProductListContainer extends Component {
                 index: Math.ceil(results.length/this.state.limit),
                 // divide el array
                 newArray: results.slice(this.state.currentOffset, this.state.currentOffset+this.state.limit),
+                // seteamos el valor de la variable con el valor de la query
+                varMeli: query,
             })
         })
         .catch(error =>{
@@ -79,7 +82,7 @@ class ProductListContainer extends Component {
     render(){
 
         // le vamos a pasar como props esa data que esta en el estado
-        const { newArray, index, currentOffset, pageCounter } = this.state;
+        const { newArray, index, currentOffset, pageCounter, varMeli } = this.state;
         //console.log(currentOffset)
         // solo queremos la data del estado
 
@@ -117,7 +120,7 @@ class ProductListContainer extends Component {
                     <span/>
                 }
                 </div>
-                <ProductList arrayOrdenado={arrayOrdenado} condicion={this.state.condicion}  />
+                <ProductList arrayOrdenado={arrayOrdenado} condicion={this.state.condicion} varMeli={varMeli}  />
                 
                 <Pagination count={index} page={pageCounter} onChange={this.handleChange} />
             </div>

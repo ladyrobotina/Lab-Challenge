@@ -15,6 +15,7 @@ class CatalogoListContainer extends Component {
         index: 0,
         limit: 30,
         newArray: [],
+        varMeli: 'MLA',
     }    
     
     componentDidMount(){
@@ -69,14 +70,14 @@ class CatalogoListContainer extends Component {
     render(){
 
         // le vamos a pasar como props esa data que esta en el estado
-        const { newArray, index, currentOffset, pageCounter } = this.state;
+        const { newArray, index, currentOffset, pageCounter, varMeli } = this.state;
         //console.log(currentOffset)
         // solo queremos la data del estado
 
         return(
             <div className='catalogoList'>
                 
-                <CatalogoList newArray={newArray} />
+                <CatalogoList newArray={newArray} varMeli={varMeli} />
                 
                 <Pagination count={index} page={pageCounter} onChange={this.handleChange} />
             </div>

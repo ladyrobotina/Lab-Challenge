@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const useStyles = makeStyles({
     
     root: {
-      maxWidth: 345,
+      maxWidth: 445,
       padding: 30,
       margin: '60px auto',
       

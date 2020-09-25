@@ -2,7 +2,11 @@ import React, {Fragment} from 'react';
 import ProductCard from './ProductCard';
 import { Grid } from '@material-ui/core';
 
-function ProductList({arrayOrdenado, condicion}) {
+// en este componente renderizamos la busqueda ordenanda por precion y ademas 
+// añadimos la condicion de mejorar la imagen 
+// el filtro lo hacemos si llega algo al array, entonce filtramos por condicion
+
+function ProductList({arrayOrdenado, condicion, varMeli}) {
     let newCondicion = []
     if (condicion){
         newCondicion = [... arrayOrdenado.filter(c => {
@@ -14,16 +18,18 @@ function ProductList({arrayOrdenado, condicion}) {
         <Fragment>
             {/* <h1>Resultado de busqueda</h1> */}
             <Grid container spacing={24} justify='center' >
+
+                {/* aqui estan contenidos el array ordenado de los productos */}
                 
                 {
                     newCondicion && newCondicion.length ?
 
                         newCondicion.map(producto => {
                             let image = producto.thumbnail.replace('I.jpg','B.jpg')
-                            let cardTitle = producto.title.split(' ').join('-')   
+                              
                         return (
                         <Grid item md={3}>
-                        <ProductCard to={`/productinfo/${cardTitle}/${producto.id} `} 
+                        <ProductCard to={`/productinfo/${varMeli}/${producto.id} `} 
                         name={producto.title} 
                         image={image} 
                         price={producto.price}
@@ -35,10 +41,10 @@ function ProductList({arrayOrdenado, condicion}) {
 
                     arrayOrdenado.map(producto => {
                         let image = producto.thumbnail.replace('I.jpg','B.jpg')
-                        let cardTitle = producto.title.split(' ').join('-')
+                        
                     return (
                     <Grid item md={3}>
-                    <ProductCard to={`/productinfo/${cardTitle}/${producto.id} `} 
+                    <ProductCard to={`/productinfo/${varMeli}/${producto.id} `} 
                     name={producto.title} 
                     image={image} 
                     price={producto.price}
